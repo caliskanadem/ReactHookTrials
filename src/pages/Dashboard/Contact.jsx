@@ -3,15 +3,17 @@ import { useFormik } from "formik";
 
 const Contact = () => {
   // const formik = useFormik({
-  const { handleSubmit, handleChange } = useFormik({
+  const { handleSubmit, handleChange, values, isSubmitting } = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
       email: "",
       message: "",
     },
-    onSubmit: (values) => {
+    onSubmit: async (values, bag) => {
+      await new Promise((r) => setTimeout(r, 1000));
       console.log(values);
+      bag.resetForm();
     },
   });
   return (
@@ -23,7 +25,9 @@ const Contact = () => {
             id="firstName"
             name="firstName"
             placeholder="Adem"
+            value={values.firstName}
             onChange={handleChange("firstName")}
+            disabled={isSubmitting}
           />
         </div>
 
@@ -33,7 +37,9 @@ const Contact = () => {
             id="lastName"
             name="lastName"
             placeholder="Caliskan"
+            value={values.lastName}
             onChange={handleChange("lastName")}
+            disabled={isSubmitting}
           />
         </div>
 
@@ -43,8 +49,10 @@ const Contact = () => {
             id="email"
             name="email"
             placeholder="adem@adm.com"
+            value={values.email}
             type="email"
             onChange={handleChange("email")}
+            disabled={isSubmitting}
           />
         </div>
 
@@ -54,11 +62,15 @@ const Contact = () => {
             id="message"
             name="message"
             placeholder="Your Message"
+            value={values.message}
             type="message"
             onChange={handleChange("message")}
+            disabled={isSubmitting}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitting}>
+          Submit
+        </button>
       </form>
     </div>
   );
