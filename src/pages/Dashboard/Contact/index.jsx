@@ -5,22 +5,29 @@ import "./styles.css";
 
 const Contact = () => {
   // const formik = useFormik({
-  const { handleSubmit, handleChange, values, isSubmitting, errors } =
-    useFormik({
-      initialValues: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        message: "",
-      },
-      onSubmit: async (values, bag) => {
-        // await new Promise((r) => setTimeout(r, 1000));
-        console.log(values);
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    isSubmitting,
+    errors,
+    touched,
+  } = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      message: "",
+    },
+    onSubmit: async (values, bag) => {
+      // await new Promise((r) => setTimeout(r, 1000));
+      console.log(values);
 
-        bag.resetForm();
-      },
-      validationSchema,
-    });
+      bag.resetForm();
+    },
+    validationSchema,
+  });
   return (
     <div>
       <form onSubmit={handleSubmit} className="form">
@@ -33,8 +40,11 @@ const Contact = () => {
             value={values.firstName}
             onChange={handleChange("firstName")}
             disabled={isSubmitting}
+            onBlur={handleBlur("firstName")}
           />
-          {errors.firstName && <div className="error">{errors.firstName}</div>}
+          {errors.firstName && touched.firstName && (
+            <div className="error">{errors.firstName}</div>
+          )}
         </div>
 
         <div>
@@ -46,8 +56,11 @@ const Contact = () => {
             value={values.lastName}
             onChange={handleChange("lastName")}
             disabled={isSubmitting}
+            onBlur={handleBlur("lastName")}
           />
-          {errors.lastName && <div className="error">{errors.lastName}</div>}
+          {errors.lastName && touched.lastName && (
+            <div className="error">{errors.lastName}</div>
+          )}
         </div>
 
         <div>
@@ -60,8 +73,11 @@ const Contact = () => {
             type="email"
             onChange={handleChange("email")}
             disabled={isSubmitting}
+            onBlur={handleBlur("email")}
           />
-          {errors.email && <div className="error">{errors.email}</div>}
+          {errors.email && touched.email && (
+            <div className="error">{errors.email}</div>
+          )}
         </div>
 
         <div>
@@ -74,8 +90,11 @@ const Contact = () => {
             type="message"
             onChange={handleChange("message")}
             disabled={isSubmitting}
+            onBlur={handleBlur("message")}
           />
-          {errors.message && <div className="error">{errors.message}</div>}
+          {errors.message && touched.message && (
+            <div className="error">{errors.message}</div>
+          )}
         </div>
         <button type="submit" disabled={isSubmitting}>
           Submit
