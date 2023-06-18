@@ -1,0 +1,47 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+  background-color: #bebe;
+  padding: 1rem;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  margin: 1rem;
+  color: rgb(129, 114, 181);
+}
+.link:hover {
+  cursor: pointer;
+  color: black;
+  /* transform: scale(2); */
+}
+.user-div {
+  margin: 1rem;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  margin-top: 1rem;
+  cursor: pointer;
+  color: black;
+}
+.form > div > label {
+  display: block;
+}
+.form > div {
+  margin-bottom: 1rem;
+}
+.form {
+  padding: 1rem;
+}
+.form > div > input,
+textarea {
+  padding: 8px;
+}
