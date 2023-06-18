@@ -1,21 +1,26 @@
 import React from "react";
 import { useFormik } from "formik";
+import validationSchema from "./validations";
+import "./styles.css";
 
 const Contact = () => {
   // const formik = useFormik({
-  const { handleSubmit, handleChange, values, isSubmitting } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      message: "",
-    },
-    onSubmit: async (values, bag) => {
-      await new Promise((r) => setTimeout(r, 1000));
-      console.log(values);
-      bag.resetForm();
-    },
-  });
+  const { handleSubmit, handleChange, values, isSubmitting, errors } =
+    useFormik({
+      initialValues: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+      },
+      onSubmit: async (values, bag) => {
+        // await new Promise((r) => setTimeout(r, 1000));
+        console.log(values);
+
+        bag.resetForm();
+      },
+      validationSchema,
+    });
   return (
     <div>
       <form onSubmit={handleSubmit} className="form">
@@ -29,6 +34,7 @@ const Contact = () => {
             onChange={handleChange("firstName")}
             disabled={isSubmitting}
           />
+          {errors.firstName && <div className="error">{errors.firstName}</div>}
         </div>
 
         <div>
@@ -41,6 +47,7 @@ const Contact = () => {
             onChange={handleChange("lastName")}
             disabled={isSubmitting}
           />
+          {errors.lastName && <div className="error">{errors.lastName}</div>}
         </div>
 
         <div>
@@ -54,6 +61,7 @@ const Contact = () => {
             onChange={handleChange("email")}
             disabled={isSubmitting}
           />
+          {errors.email && <div className="error">{errors.email}</div>}
         </div>
 
         <div>
@@ -67,6 +75,7 @@ const Contact = () => {
             onChange={handleChange("message")}
             disabled={isSubmitting}
           />
+          {errors.message && <div className="error">{errors.message}</div>}
         </div>
         <button type="submit" disabled={isSubmitting}>
           Submit
